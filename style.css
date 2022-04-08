@@ -8,7 +8,7 @@
 body {
   height: 100vh;
 
-  background-color: #260f26;
+  background-color: var(--body-bg);
 
   display: flex;
   justify-content: center;
@@ -17,11 +17,86 @@ body {
   font-size: 7.5vmin;
 }
 
+/* Theme DarkPurplue */
+[data-theme="darkPurple"] {
+  --body-bg: #260f26;
+  --game-board-bg: #251f47;
+  --cell-bg: #404e7c;
+  --tile-bg-number: 130;
+  --tile-bg-percent: 40%;
+  --tile-txt-number: 145;
+  --tile-txt-percent: 31%;
+}
+/* Theme Earth Yellow */
+[data-theme="earthYellow"] {
+  --body-bg: #dba159;
+  --game-board-bg: #efd780;
+  --cell-bg: #fcfdaf;
+  --tile-bg-number: 110;
+  --tile-bg-percent: 29%;
+  --tile-txt-number: 74;
+  --tile-txt-percent: 100%;
+}
+
+/* Switch Theme */
+nav {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px 0;
+}
+
+/*slider switch css */
+.theme-switch-wrapper {
+  display: flex;
+  align-items: center;
+}
+.theme-switch-wrapper > em {
+  margin-left: 10px;
+  font-size: 1rem;
+}
+.theme-switch {
+  display: inline-block;
+  height: 34px;
+  position: relative;
+  width: 60px;
+}
+
+.theme-switch input {
+  display: none;
+}
+
+.slider {
+  background-color: #ccc;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: 0.4s;
+}
+
+.slider:before {
+  background-color: #fff;
+  bottom: 4px;
+  content: "";
+  height: 26px;
+  left: 4px;
+  position: absolute;
+  transition: 0.4s;
+  width: 26px;
+}
+
+input:checked + .slider {
+  background-color: #66bb6a;
+}
+
+/* Game style */
 #game-board {
   display: grid;
   grid-template-rows: repeat(var(--grid-size), var(--cell-size));
   grid-template-columns: repeat(var(--grid-size), var(--cell-size));
-  background-color: #251f47;
+  background-color: var(--game-board-bg);
   gap: var(--cell-gap);
   border: 1vmin;
   padding: 2vmin;
@@ -30,7 +105,7 @@ body {
 }
 
 .cell {
-  background-color: #404e7c;
+  background-color: var(--cell-bg);
   border-radius: 1vmin;
 }
 
@@ -46,8 +121,16 @@ body {
   border-radius: 1vmin;
   font-weight: bold;
 
-  background-color: hsl(130, 40%, var(--background-lightness));
-  color: hsl(145, 31%, var(--text-lightness));
+  background-color: hsl(
+    var(--tile-bg-number),
+    var(--tile-bg-percent),
+    var(--background-lightness)
+  );
+  color: hsl(
+    var(--tile-txt-number),
+    var(--tile-txt-percent),
+    var(--text-lightness)
+  );
   animation: show 200ms ease-in-out;
   transition: 100ms ease-in-out;
 }

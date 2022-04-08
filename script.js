@@ -1,12 +1,34 @@
 import Grid from "./Grid.js";
 import Tile from "./Tile.js";
 
+// Theme
+const toggleSwitch = document.querySelector(
+  '.theme-switch input[type="checkbox"]'
+);
+
+function switchTheme(e) {
+  if (e.target.checked) {
+    document.documentElement.setAttribute("data-theme", "darkPurple");
+    localStorage.setItem("theme", "darkPurple");
+  } else {
+    document.documentElement.setAttribute("data-theme", "earthYellow");
+    localStorage.setItem("theme", "earthYellow");
+  }
+}
+
+toggleSwitch.addEventListener("change", switchTheme, false);
+
+// Game
 const gameBoard = document.getElementById("game-board");
 let grid;
 
 start();
 
 function start() {
+  // apply default theme
+  document.documentElement.setAttribute("data-theme", "earthYellow");
+  localStorage.setItem("theme", "earthYellow");
+
   grid = new Grid(gameBoard);
   grid.randomEmptyCell().tile = new Tile(gameBoard);
   grid.randomEmptyCell().tile = new Tile(gameBoard);
